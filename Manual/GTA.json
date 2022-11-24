@@ -1,0 +1,36 @@
+{
+  "Compatibility": "Compatible",
+  "Contributors": {
+    "Audio": [ "Steppix06" ],
+    "Developer": [
+      "Steppix06",
+      "ARandomItalianGuy"
+    ],
+    "Idea": [ "Steppix06" ],
+    "Maintainer": [ "Steppix06" ],
+    "Manual": [
+      "Steppix06",
+      "ARandomItalianGuy"
+    ],
+    "Manual graphics": [
+      "Steppix06",
+      "ARandomItalianGuy"
+    ],
+    "Modeling": [
+      "Steppix06",
+      "ARandomItalianGuy"
+    ]
+  },
+  "DefuserDifficulty": "Easy",
+  "Description": "You need to escape from the police, by bringing the stars back to 0 using GTA5 cheats, on a fake PS Controller. #gta #cheats #gamepad #controller #joypad #stars #playstation #ps5",
+  "ExpertDifficulty": "Easy",
+  "ModuleID": "gta",
+  "Name": "GTA Cheats",
+  "Origin": "Mods",
+  "Published": "2022-11-24",
+  "SortKey": "GTACHEATS",
+  "SourceUrl": "https://github.com/organetto8/GTACheats",
+  "SteamID": "2892700851",
+  "Symbol": "Gta",
+  "Type": "Regular"
+}
