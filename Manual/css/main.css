@@ -43,6 +43,7 @@ html {
     font-family: 'Special Elite', 'Courier New', monospace;
     font-size: 12pt;
     line-height: 1.4;
+    scroll-behavior: smooth;
 }
 
 /*
@@ -995,4 +996,8 @@ td, th {
     #pageTypeOption {
         display: none;
     }
+}
+
+.star-decrease{
+    text-align: center;
 }

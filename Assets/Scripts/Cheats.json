@@ -1,0 +1,12 @@
+{
+    "PAINKILLER":{
+        "name":"PAINKILLER",
+        "value":3,
+        "input":["Right", "X", "Right", "Left", "Right", "R1", "Right", "Left", "X", "Triangle"]
+    },
+    "CATCHME":{
+        "name":"CATCHME",
+        "value":1,
+        "input":["Triangle", "Left", "Right", "Right", "L2", "L1", "Square"]
+    }
+}
