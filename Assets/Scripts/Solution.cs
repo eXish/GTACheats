@@ -12,12 +12,10 @@ public class Solution : MonoBehaviour
     public CheatSheet Cheats;
     public string[] input_code;
     public int value;
-    private string name;
-
+    public string reason;
 
     public void FindSolution(int starsNumber, int stars2counter)
     {
-
         switch (starsNumber)
         {
             case 5:
@@ -33,11 +31,6 @@ public class Solution : MonoBehaviour
                 FindSolution2Less(stars2counter);
                 break;
         }
-
-
-        Debug.Log("Correct Cheat Name: " + name);
-        Debug.Log("Correct Input Code: " + input_code.Join(","));
-
     }
 
     private bool HasEmptyPortPlate()
@@ -79,28 +72,28 @@ public class Solution : MonoBehaviour
             value = Cheats.PAINKILLER_VALUE;
             name = "PAINKILLER";
             input_code = Cheats.PAINKILLER_INPUT;
-            Debug.Log("BOB AND CAR");
+            reason = "There is a BOB indicator and an unlit CAR indicator.";
         }
         else if (emptyPortPlate)
         {
             value = Cheats.HOTHANDS_VALUE;
             name = "HOTHANDS";
             input_code = Cheats.HOTHANDS_INPUT;
-            Debug.Log("EMPTY PORT PLATE");
+            reason = "There is an empty port plate.";
         }
         else if (odd)
         {
             value = Cheats.BUZZOFF_VALUE;
             name = "BUZZOFF";
             input_code = Cheats.BUZZOFF_INPUT;
-            Debug.Log("ODD NUMBER IN THE SERIAL");
+            reason = "The serial number contains an odd digit.";
         }
         else
         {
             value = Cheats.LAWYERUP_VALUE;
             name = "LAWYERUP";
             input_code = Cheats.LAWYERUP_INPUT;
-            Debug.Log("NOTHING");
+            reason = "None of the other rules for this stage applied.";
         }
     }
 
@@ -118,28 +111,33 @@ public class Solution : MonoBehaviour
             value = Cheats.TOOLUP_VALUE;
             name = "TOOLUP";
             input_code = Cheats.TOOLUP_INPUT;
-            Debug.Log("DVI AND PS/2");
+            reason = "There is both a DVI-D and PS/2 port present.";
         }
         else if (Parallel || D2Batteries)
         {
             value = Cheats.HIGHEX_VALUE;
             name = "HIGHEX";
             input_code = Cheats.HIGHEX_INPUT;
-            Debug.Log("PARALLEL OR 2 D BATTERIES");
+            if (Parallel && D2Batteries)
+                reason = "There is both a parallel port and at least 2 D batteries present.";
+            else if (Parallel)
+                reason = "There is a parallel port present.";
+            else
+                reason = "There are at least 2 D batteries present.";
         }
         else if (Indicators)
         {
             value = Cheats.RAPIDGT_VALUE;
             name = "RAPIDGT";
             input_code = Cheats.RAPIDGT_INPUT;
-            Debug.Log("MORE THAN 2 LIT INDICATORS");
+            reason = "There are at least 2 lit indicators.";
         }
         else
         {
             value = Cheats.LAWYERUP_VALUE;
             name = "LAWYERUP";
             input_code = Cheats.LAWYERUP_INPUT;
-            Debug.Log("NOTHING");
+            reason = "None of the other rules for this stage applied.";
         }
     }
 
@@ -155,28 +153,28 @@ public class Solution : MonoBehaviour
             value = Cheats.TURTLE_VALUE;
             name = "TURTLE";
             input_code = Cheats.TURTLE_INPUT;
-            Debug.Log("3 OR MORE PORT PLATES");
+            reason = "There are at least 3 port plates present.";
         }
         else if (Lit_Unlit)
         {
             value = Cheats.GOTGILLS_JUMP_VALUE;
             name = "GOTGILLS_JUMP";
             input_code = Cheats.GOTGILLS_JUMP_INPUT;
-            Debug.Log("MORE LIT THAN UNLIT INDICATORS");
+            reason = "There are more lit than unlit indicators.";
         }
         else if (NoInd)
         {
             value = Cheats.GOTGILLS_SWIM_VALUE;
             name = "GOTGILLS_SWIM";
             input_code = Cheats.GOTGILLS_SWIM_INPUT;
-            Debug.Log("NO INDICATORS");
+            reason = "There are no indicators.";
         }
         else
         {
             value = Cheats.LAWYERUP_VALUE;
             name = "LAWYERUP";
             input_code = Cheats.LAWYERUP_INPUT;
-            Debug.Log("NOTHING");
+            reason = "None of the other rules for this stage applied.";
         }
     }
 
@@ -204,7 +202,6 @@ public class Solution : MonoBehaviour
 
     private void FindSolution2Less(int stars2counter)
     {
-
         int numberOfNumbersInSerial = Bomb.GetSerialNumberNumbers().Count();
         int numberOfLettersInSerial = Bomb.GetSerialNumberLetters().Count();
         int pairsOfAA = (int)(Bomb.GetBatteryCount(Battery.AA) / 2);
@@ -214,8 +211,6 @@ public class Solution : MonoBehaviour
         bool vowelInAnyIndicator = IsVowelInAnyIndicator();
         bool ind_ser = matchingLettersIndicatorsSerial();
 
-        Debug.Log("Occourrence #" + stars2counter);
-
         if (stars2counter == 1)
         {
             if (numberOfNumbersInSerial > numberOfLettersInSerial)
@@ -223,28 +218,28 @@ public class Solution : MonoBehaviour
                 value = Cheats.CATCHME_VALUE;
                 name = "CATCHME";
                 input_code = Cheats.CATCHME_INPUT;
-                Debug.Log("MORE DIGITS THAN LETTERS IN THE SERIAL");
+                reason = "Occurence #" + stars2counter + ": There are more digits than letters in the serial nummber.";
             }
             else if (pairsOfAA >= 2)
             {
                 value = Cheats.INCENDIARY_VALUE;
                 name = "INCENDIARY";
                 input_code = Cheats.INCENDIARY_INPUT;
-                Debug.Log("MORE THAN 2 PAIRS OF AA BATTERIES");
+                reason = "Occurence #" + stars2counter + ": There are at least two pairs of AA-batteries present.";
             }
             else if (stereo)
             {
                 value = Cheats.BANDIT_VALUE;
                 name = "BANDIT";
                 input_code = Cheats.BANDIT_INPUT;
-                Debug.Log("STEREO RCA PORT");
+                reason = "Occurence #" + stars2counter + ": There is a Stereo-RCA port present.";
             }
             else
             {
                 value = Cheats.LAWYERUP_VALUE;
                 name = "LAWYERUP";
                 input_code = Cheats.LAWYERUP_INPUT;
-                Debug.Log("NOTHING");
+                reason = "Occurence #" + stars2counter + ": None of the other rules for this stage applied.";
             }
         }
         else if (stars2counter == 2)
@@ -254,28 +249,28 @@ public class Solution : MonoBehaviour
                 value = Cheats.BANDIT_VALUE;
                 name = "BANDIT";
                 input_code = Cheats.BANDIT_INPUT;
-                Debug.Log("AN INDICATOR HAS A MATCHING LETTER WITH THE SERIAL");
+                reason = "Occurence #" + stars2counter + ": There is an indicator with a matching letter in the serial number.";
             }
             else if (vowelInAnyIndicator)
             {
                 value = Cheats.CATCHME_VALUE;
                 name = "CATCHME";
                 input_code = Cheats.CATCHME_INPUT;
-                Debug.Log("AN INDICATOR HAS A VOWEL");
+                reason = "Occurence #" + stars2counter + ": There is an indicator with a vowel.";
             }
             else if (numberOfLettersInSerial > numberOfNumbersInSerial)
             {
                 value = Cheats.INCENDIARY_VALUE;
                 name = "INCENDIARY";
                 input_code = Cheats.INCENDIARY_INPUT;
-                Debug.Log("MORE LETTERS THAN DIGITS IN THE SERIAL");
+                reason = "Occurence #" + stars2counter + ": There are more letters than digits in the serial number.";
             }
             else
             {
                 value = Cheats.LAWYERUP_VALUE;
                 name = "LAWYERUP";
                 input_code = Cheats.LAWYERUP_INPUT;
-                Debug.Log("NOTHING");
+                reason = "Occurence #" + stars2counter + ": None of the other rules for this stage applied.";
             }
         }
         else
@@ -285,31 +280,29 @@ public class Solution : MonoBehaviour
                 value = Cheats.INCENDIARY_VALUE;
                 name = "INCENDIARY";
                 input_code = Cheats.INCENDIARY_INPUT;
-                Debug.Log("SAME NUMBER OF DIGITS AND LETTERS IN THE SERIAL");
+                reason = "Occurence #" + stars2counter + ": There is an equal number of letters and digits in the serial number.";
             }
             else if (RJ45)
             {
                 value = Cheats.BANDIT_VALUE;
                 name = "BANDIT";
                 input_code = Cheats.BANDIT_INPUT;
-                Debug.Log("RJ45");
+                reason = "Occurence #" + stars2counter + ": There is an RJ-45 port present.";
             }
             else if (Serial)
             {
                 value = Cheats.CATCHME_VALUE;
                 name = "CATCHME";
                 input_code = Cheats.CATCHME_INPUT;
-                Debug.Log("SERIAL PORT");
+                reason = "Occurence #" + stars2counter + ": There is a serial port present.";
             }
             else
             {
                 value = Cheats.LAWYERUP_VALUE;
                 name = "LAWYERUP";
                 input_code = Cheats.LAWYERUP_INPUT;
-                Debug.Log("NOTHING");
+                reason = "Occurence #" + stars2counter + ": None of the other rules for this stage applied";
             }
         }
-
     }
-
 }
